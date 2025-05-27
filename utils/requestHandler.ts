@@ -37,32 +37,39 @@ interface RedirectResponse {
  * // Basic JSON response
  * router.get('/users', requestHandler(async (req) => {
  *   const users = await getUsers();
- *   return { data: users };
+ *   return {
+ *     success: true,
+ *     message: 'Users fetched successfully',
+ *     data: users,
+ *   };
  * }));
  *
  * // File download
  * router.get('/download', requestHandler(async () => {
  *   return {
+ *     success: true,
+ *     message: 'File downloaded successfully',
  *     data: { path: './files/doc.pdf', filename: 'document.pdf' },
- *     type: 'download'
  *   };
- * }));
+ * }, 'download'));
  *
  * // SSE Stream
  * router.get('/events', requestHandler(async () => {
  *   return {
+ *     success: true,
+ *     message: 'SSE stream started',
  *     data: { event: 'update', data: { status: 'processing' } },
- *     type: 'sse'
  *   };
- * }));
+ * }, 'sse'));
  *
  * // Redirect
  * router.get('/old-path', requestHandler(async () => {
  *   return {
+ *     success: true,
+ *     message: 'Redirected to new path',
  *     data: { url: '/new-path', statusCode: 301 },
- *     type: 'redirect'
  *   };
- * }));
+ * }, 'redirect'));
  */
 export default function requestHandler<
 	T,
